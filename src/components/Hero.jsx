@@ -1,0 +1,139 @@
+import { ChevronDown, Sparkles, ShieldCheck, Star } from 'lucide-react'
+
+export default function Hero() {
+  return (
+    <section
+      id="inicio"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-brand-navy"
+    >
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Large glow top-right */}
+        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-brand-blue/10 blur-[120px]" />
+        {/* Medium glow bottom-left */}
+        <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] rounded-full bg-brand-mid/15 blur-[100px]" />
+        {/* Grid pattern */}
+        <div
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(0,160,220,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(0,160,220,0.4) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+          }}
+        />
+        {/* Diagonal accent line */}
+        <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-blue/20 to-transparent" />
+      </div>
+
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left: Text */}
+          <div className="flex flex-col gap-6 animate-fade-up">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-brand-blue/15 border border-brand-blue/30 rounded-full px-4 py-2 w-fit">
+              <Sparkles size={14} className="text-brand-blue" />
+              <span className="text-brand-light text-xs font-body font-medium tracking-wide uppercase">
+                Servicios Profesionales de Limpieza
+              </span>
+            </div>
+
+            {/* Heading */}
+            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-none tracking-tight">
+              Limpieza que{' '}
+              <span className="text-brand-blue">transforma</span>{' '}
+              tu espacio
+            </h1>
+
+            {/* Subheading */}
+            <p className="font-body text-lg text-white/60 max-w-md leading-relaxed">
+              Soluciones de limpieza profesional para hogares y empresas. 
+              Resultados impecables, atención personalizada y tecnología moderna.
+            </p>
+
+            {/* Stats row */}
+            <div className="flex items-center gap-8 py-2">
+              {[
+                { value: '500+', label: 'Clientes' },
+                { value: '8+', label: 'Años de experiencia' },
+                { value: '100%', label: 'Satisfacción' },
+              ].map(stat => (
+                <div key={stat.label} className="flex flex-col">
+                  <span className="font-display text-2xl font-bold text-brand-blue">{stat.value}</span>
+                  <span className="font-body text-xs text-white/50 leading-tight">{stat.label}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* CTAs */}
+            <div className="flex flex-wrap gap-3 pt-2">
+              <a
+                href="#contacto"
+                className="inline-flex items-center gap-2 bg-brand-blue hover:bg-brand-mid text-white font-body font-semibold px-7 py-3.5 rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-brand-blue/30 hover:-translate-y-0.5"
+              >
+                Solicitar cotización
+              </a>
+              <a
+                href="#servicios"
+                className="inline-flex items-center gap-2 border border-white/20 hover:border-brand-blue/50 text-white/80 hover:text-white font-body font-medium px-7 py-3.5 rounded-full transition-all duration-200 hover:bg-white/5"
+              >
+                Ver servicios
+              </a>
+            </div>
+
+            {/* Trust badge */}
+            <div className="flex items-center gap-3 pt-2">
+              <ShieldCheck size={18} className="text-brand-blue flex-shrink-0" />
+              <span className="font-body text-sm text-white/50">
+                Personal capacitado · Productos certificados · Resultados garantizados
+              </span>
+            </div>
+          </div>
+
+          {/* Right: Visual card */}
+          <div className="relative hidden lg:flex justify-center animate-fade-up delay-300">
+            <div className="relative w-full max-w-sm">
+              {/* Main card */}
+              <div className="relative bg-gradient-to-br from-brand-mid/30 to-brand-blue/10 backdrop-blur-sm border border-brand-blue/20 rounded-3xl p-8 shadow-2xl">
+                {/* Icon grid */}
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  {[
+                    { icon: '🏠', label: 'Residencial' },
+                    { icon: '🏢', label: 'Corporativo' },
+                    { icon: '✨', label: 'Profundo' },
+                    { icon: '🚗', label: 'Vehicular' },
+                  ].map(item => (
+                    <div key={item.label} className="bg-brand-navy/60 rounded-2xl p-4 flex flex-col items-center gap-2 border border-white/5 hover:border-brand-blue/30 transition-colors">
+                      <span className="text-2xl">{item.icon}</span>
+                      <span className="font-body text-xs text-white/70 text-center">{item.label}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Rating */}
+                <div className="flex items-center gap-2 bg-brand-navy/40 rounded-2xl p-3">
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={14} className="fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  <span className="font-body text-sm text-white/70">
+                    <strong className="text-white">4.9</strong> · 200+ reseñas
+                  </span>
+                </div>
+              </div>
+
+              {/* Floating badge */}
+              <div className="absolute -top-4 -right-4 bg-brand-blue text-white font-display font-bold text-sm px-4 py-2 rounded-2xl shadow-lg shadow-brand-blue/40 rotate-3">
+                ¡Disponible hoy!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/30 animate-bounce">
+        <ChevronDown size={20} />
+      </div>
+    </section>
+  )
+}
