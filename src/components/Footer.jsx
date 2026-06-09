@@ -1,4 +1,5 @@
 import { MessageCircle } from 'lucide-react'
+import logoWhite from '../assets/logo-white.png'
 
 const WHATSAPP_NUMBER = '529XXXXXXXXX'
 const WHATSAPP_MSG = encodeURIComponent(
@@ -12,14 +13,14 @@ export default function Footer() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
           <div className="lg:col-span-2 flex flex-col gap-4">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-brand-blue flex items-center justify-center font-display font-bold text-white text-sm">
-                MC
-              </div>
-              <span className="font-display text-white font-semibold text-lg">
-                Mr. <span className="text-brand-blue">Clean</span>
-              </span>
-            </div>
+            <a href="#inicio" className="flex items-center">
+              <img
+                src={logoWhite}
+                alt="Mr. Clean - Melcon Suministros y Consultoría"
+                className="h-10 w-auto object-contain"
+                loading="eager"
+              />
+            </a>
 
             <p className="font-body text-sm text-white/50 max-w-xs leading-relaxed">
               Soluciones de limpieza profesional para hogares y empresas.
@@ -43,7 +44,7 @@ export default function Footer() {
             </p>
 
             <ul className="flex flex-col gap-2">
-              {['Inicio', 'Nosotros', 'Servicios', 'Galería', 'Contacto'].map(
+              {['Inicio', 'Nosotros', 'Servicios', 'Galería', 'Empresas', 'Certificaciones', 'Contacto'].map(
                 (item) => (
                   <li key={item}>
                     <a

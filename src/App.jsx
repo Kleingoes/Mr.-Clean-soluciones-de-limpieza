@@ -3,6 +3,8 @@ import Hero from './components/Hero.jsx'
 import Nosotros from './components/Nosotros.jsx'
 import Servicios from './components/Servicios.jsx'
 import Galeria from './components/Galeria.jsx'
+import Empresas from './components/Empresas.jsx'
+import Certificaciones from './components/Certificaciones.jsx'
 import Contacto from './components/Contacto.jsx'
 import Footer from './components/Footer.jsx'
 import WhatsAppFloat from './components/WhatsAppFloat.jsx'
@@ -17,6 +19,8 @@ export default function App() {
         <Nosotros />
         <Servicios />
         <Galeria />
+        <Empresas />
+        <Certificaciones />
         <Contacto />
       </main>
 

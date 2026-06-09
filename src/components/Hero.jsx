@@ -1,5 +1,13 @@
-import { ChevronDown, Sparkles, ShieldCheck, Star } from 'lucide-react'
-
+import {
+  ChevronDown,
+  Sparkles,
+  ShieldCheck,
+  Star,
+  Home,
+  Building2,
+  Sparkles as SparklesIcon,
+  Briefcase
+} from 'lucide-react'
 export default function Hero() {
   return (
     <section
@@ -38,23 +46,24 @@ export default function Hero() {
 
             {/* Heading */}
             <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-none tracking-tight">
-              Limpieza que{' '}
-              <span className="text-brand-blue">transforma</span>{' '}
-              tu espacio
+              Soluciones Profesionales de {' '}
+              <span className="text-brand-blue">limpieza</span>{' '}
+              para empresas y hogares
             </h1>
 
             {/* Subheading */}
             <p className="font-body text-lg text-white/60 max-w-md leading-relaxed">
-              Soluciones de limpieza profesional para hogares y empresas. 
-              Resultados impecables, atención personalizada y tecnología moderna.
+              Más de 10 años brindando servicios especializados de limpieza,
+              sanitización y mantenimiento para hogares, oficinas, comercios, 
+              hospitales e industrias.
             </p>
 
             {/* Stats row */}
             <div className="flex items-center gap-8 py-2">
               {[
-                { value: '500+', label: 'Clientes' },
-                { value: '8+', label: 'Años de experiencia' },
-                { value: '100%', label: 'Satisfacción' },
+                { value: '10+', label: 'Años de experiencia' },
+                { value: '100%', label: 'Compromiso' },
+                { value: '24/7', label: 'Atencion' },
               ].map(stat => (
                 <div key={stat.label} className="flex flex-col">
                   <span className="font-display text-2xl font-bold text-brand-blue">{stat.value}</span>
@@ -77,6 +86,12 @@ export default function Hero() {
               >
                 Ver servicios
               </a>
+              <a
+                href="#contacto"
+                className="inline-flex items-center gap-2 border border-white/20 hover:border-brand-blue/50 text-white/80 hover:text-white font-body font-medium px-7 py-3.5 rounded-full transition-all duration-200 hover:bg-white/5"
+              >
+                Trabaja con nosotros
+              </a>
             </div>
 
             {/* Trust badge */}
@@ -96,15 +111,26 @@ export default function Hero() {
                 {/* Icon grid */}
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   {[
-                    { icon: '🏠', label: 'Residencial' },
-                    { icon: '🏢', label: 'Corporativo' },
-                    { icon: '✨', label: 'Profundo' },
-                    { icon: '🚗', label: 'Vehicular' },
+                     { icon: Home, label: 'Residencial' },
+                     { icon: Building2, label: 'Corporativo' },
+                     { icon: SparklesIcon, label: 'Sanitización' },
+                      { icon: Briefcase, label: 'Industrial' },
+
                   ].map(item => (
-                    <div key={item.label} className="bg-brand-navy/60 rounded-2xl p-4 flex flex-col items-center gap-2 border border-white/5 hover:border-brand-blue/30 transition-colors">
-                      <span className="text-2xl">{item.icon}</span>
-                      <span className="font-body text-xs text-white/70 text-center">{item.label}</span>
-                    </div>
+<div
+  key={item.label}
+  className="bg-brand-navy/60 rounded-2xl p-4 flex flex-col items-center gap-2 border border-white/5 hover:border-brand-blue/30 transition-colors"
+>
+  <item.icon
+    size={28}
+    className="text-brand-blue"
+    strokeWidth={2}
+  />
+
+  <span className="font-body text-xs text-white/70 text-center">
+    {item.label}
+  </span>
+</div>
                   ))}
                 </div>
 
