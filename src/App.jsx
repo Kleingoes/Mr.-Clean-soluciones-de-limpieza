@@ -3,7 +3,8 @@ import Hero from './components/Hero.jsx'
 import Nosotros from './components/Nosotros.jsx'
 import Servicios from './components/Servicios.jsx'
 import Galeria from './components/Galeria.jsx'
-import Empresas from './components/Empresas.jsx'
+import Clientes from './components/Clientes.jsx'
+import Curriculum from './components/Curriculum.jsx'
 import Certificaciones from './components/Certificaciones.jsx'
 import Contacto from './components/Contacto.jsx'
 import Footer from './components/Footer.jsx'
@@ -19,7 +20,8 @@ export default function App() {
         <Nosotros />
         <Servicios />
         <Galeria />
-        <Empresas />
+        <Clientes />
+        <Curriculum />
         <Certificaciones />
         <Contacto />
       </main>

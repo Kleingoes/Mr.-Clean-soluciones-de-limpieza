@@ -1,12 +1,8 @@
-import {
+﻿import {
   ChevronDown,
   Sparkles,
   ShieldCheck,
-  Star,
-  Home,
-  Building2,
-  Sparkles as SparklesIcon,
-  Briefcase
+  MapPin
 } from 'lucide-react'
 export default function Hero() {
   return (
@@ -103,53 +99,48 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right: Visual card */}
+          {/* Right: Corporate card */}
           <div className="relative hidden lg:flex justify-center animate-fade-up delay-300">
-            <div className="relative w-full max-w-sm">
-              {/* Main card */}
-              <div className="relative bg-gradient-to-br from-brand-mid/30 to-brand-blue/10 backdrop-blur-sm border border-brand-blue/20 rounded-3xl p-8 shadow-2xl">
-                {/* Icon grid */}
-                <div className="grid grid-cols-2 gap-4 mb-6">
+            <div className="w-full max-w-sm">
+              <div className="bg-gradient-to-br from-brand-mid/30 to-brand-blue/10 backdrop-blur-sm border border-brand-blue/20 rounded-3xl p-8 shadow-2xl flex flex-col gap-6">
+
+                {/* Cobertura */}
+                <div className="flex flex-col gap-3">
+                  <span className="font-body text-brand-blue text-xs uppercase tracking-widest font-semibold">
+                    Cobertura
+                  </span>
                   {[
-                     { icon: Home, label: 'Residencial' },
-                     { icon: Building2, label: 'Corporativo' },
-                     { icon: SparklesIcon, label: 'Sanitización' },
-                      { icon: Briefcase, label: 'Industrial' },
-
-                  ].map(item => (
-<div
-  key={item.label}
-  className="bg-brand-navy/60 rounded-2xl p-4 flex flex-col items-center gap-2 border border-white/5 hover:border-brand-blue/30 transition-colors"
->
-  <item.icon
-    size={28}
-    className="text-brand-blue"
-    strokeWidth={2}
-  />
-
-  <span className="font-body text-xs text-white/70 text-center">
-    {item.label}
-  </span>
-</div>
+                    'Tuxtla Gutiérrez, Chiapas',
+                    'Todo el estado de Chiapas',
+                    'Proyectos a nivel nacional',
+                  ].map((lugar) => (
+                    <div key={lugar} className="flex items-start gap-3">
+                      <MapPin size={16} className="text-brand-blue flex-shrink-0 mt-0.5" />
+                      <span className="font-body text-sm text-white/80">{lugar}</span>
+                    </div>
                   ))}
                 </div>
 
-                {/* Rating */}
-                <div className="flex items-center gap-2 bg-brand-navy/40 rounded-2xl p-3">
-                  <div className="flex gap-0.5">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={14} className="fill-yellow-400 text-yellow-400" />
+                {/* Divider */}
+                <div className="w-full h-px bg-gradient-to-r from-transparent via-brand-blue/20 to-transparent" />
+
+                {/* Especialidades */}
+                <div className="flex flex-col gap-3">
+                  <span className="font-body text-brand-blue text-xs uppercase tracking-widest font-semibold">
+                    Especialidades
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {['Hogar', 'Oficinas', 'Industria', 'Clínicas', 'Post-obra', 'Sanitización'].map((esp) => (
+                      <span
+                        key={esp}
+                        className="bg-brand-navy/60 border border-white/10 rounded-full px-4 py-1.5 text-xs text-white/80"
+                      >
+                        {esp}
+                      </span>
                     ))}
                   </div>
-                  <span className="font-body text-sm text-white/70">
-                    <strong className="text-white">4.9</strong> · 200+ reseñas
-                  </span>
                 </div>
-              </div>
 
-              {/* Floating badge */}
-              <div className="absolute -top-4 -right-4 bg-brand-blue text-white font-display font-bold text-sm px-4 py-2 rounded-2xl shadow-lg shadow-brand-blue/40 rotate-3">
-                ¡Disponible hoy!
               </div>
             </div>
           </div>

@@ -1,9 +1,9 @@
 import {
   CheckCircle2,
   ShieldCheck,
-  Award,
-  Sparkles
+  Award
 } from 'lucide-react'
+import useInView from '../hooks/useInView'
 
 const valores = [
   'Personal certificado y con experiencia',
@@ -15,42 +15,34 @@ const valores = [
 ]
 
 export default function Nosotros() {
+  const [ref, inView] = useInView()
   return (
-    <section id="nosotros" className="py-24 bg-white overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="nosotros" className="py-24 bg-white relative shadow-[0_-6px_20px_-6px_rgba(0,0,0,0.08)]">
+      <div ref={ref} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* Columna izquierda */}
-          <div className="relative">
+          <div className={`relative transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`}>
 
-            <div className="relative bg-gradient-to-br from-brand-navy to-brand-mid rounded-3xl p-1 shadow-2xl shadow-brand-navy/20">
-              <div className="bg-gradient-to-br from-brand-navy to-[#001a4a] rounded-[22px] p-8 h-80 flex items-center justify-center">
-
-                <div className="text-center">
-
-                  <div className="flex justify-center mb-4">
-                    <Sparkles
-                      size={72}
-                      className="text-brand-blue"
-                      strokeWidth={1.8}
-                    />
-                  </div>
-
-                  <p className="font-display text-2xl font-bold text-white">
-                    Mr. Clean
-                  </p>
-
-                  <p className="font-body text-brand-light/70 text-sm mt-1">
-                    Soluciones de Limpieza
-                  </p>
-
+            <div className="relative bg-gradient-to-br from-gray-50 to-white rounded-3xl shadow-lg shadow-gray-200/50 border border-gray-100 p-12 md:p-16 flex items-center justify-center min-h-[400px]">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <img
+                  src="/pilares_logo.svg"
+                  alt="Pilares corporativos"
+                  className="w-full h-full object-contain"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <img
+                    src="/logo-icon.png"
+                    alt="Mr. Clean"
+                    className="w-[22%] h-auto max-w-[90px]"
+                  />
                 </div>
-
               </div>
             </div>
 
             {/* Experiencia */}
-            <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl border border-gray-100 p-4 flex items-center gap-3">
+            <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-lg border border-gray-100 p-4 flex items-center gap-3">
 
               <div className="w-10 h-10 rounded-full bg-brand-blue/10 flex items-center justify-center">
                 <Award
@@ -72,19 +64,21 @@ export default function Nosotros() {
             </div>
 
             {/* Clientes */}
-            <div className="absolute -top-6 -left-6 bg-brand-blue rounded-2xl shadow-xl shadow-brand-blue/30 p-4 flex items-center gap-3">
+            <div className="absolute -top-6 -left-6 bg-white rounded-2xl shadow-lg border border-gray-100 p-4 flex items-center gap-3">
 
-              <ShieldCheck
-                size={26}
-                className="text-white"
-              />
+              <div className="w-10 h-10 rounded-full bg-brand-blue/10 flex items-center justify-center">
+                <ShieldCheck
+                  size={22}
+                  className="text-brand-blue"
+                />
+              </div>
 
               <div>
-                <p className="font-display text-xl font-bold text-white leading-none">
+                <p className="font-display text-xl font-bold text-brand-navy leading-none">
                   Muchos
                 </p>
 
-                <p className="font-body text-xs text-white/70 mt-0.5">
+                <p className="font-body text-xs text-gray-500 mt-0.5">
                   clientes satisfechos
                 </p>
               </div>
@@ -94,7 +88,7 @@ export default function Nosotros() {
           </div>
 
           {/* Columna derecha */}
-          <div className="flex flex-col gap-6">
+          <div className={`flex flex-col gap-6 transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
 
             <span className="font-body text-brand-blue font-semibold text-sm uppercase tracking-widest">
               Quiénes somos

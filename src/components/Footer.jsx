@@ -8,7 +8,7 @@ const WHATSAPP_MSG = encodeURIComponent(
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-navy text-white">
+    <footer className="bg-brand-navy text-white relative shadow-[0_-6px_20px_-6px_rgba(0,0,0,0.3)]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
 

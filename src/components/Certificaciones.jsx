@@ -1,4 +1,5 @@
 import { ShieldCheck, BadgeCheck } from 'lucide-react'
+import useInView from '../hooks/useInView'
 
 const certificaciones = [
   {
@@ -10,40 +11,41 @@ const certificaciones = [
 ]
 
 export default function Certificaciones() {
+  const [ref, inView] = useInView()
   return (
-    <section id="certificaciones" className="py-24 bg-brand-navy">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+    <section id="certificaciones" className="py-24 bg-white relative shadow-[0_-6px_20px_-6px_rgba(0,0,0,0.08)]">
+      <div ref={ref} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={`text-center max-w-2xl mx-auto mb-16 transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`}>
           <span className="font-body text-brand-blue font-semibold text-sm uppercase tracking-widest">
             Legalidad y transparencia
           </span>
-          <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-white mt-2 leading-tight">
+          <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-brand-navy mt-2 leading-tight">
             Certificaciones{' '}
             <span className="text-brand-blue">y normas</span>
           </h2>
-          <p className="font-body text-white/50 mt-4">
+          <p className="font-body text-gray-500 mt-4">
             Operamos con total cumplimiento normativo y certificaciones que
             avalan la calidad y legalidad de nuestros servicios.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className={`flex justify-center transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
           {certificaciones.map((cert) => (
             <div
               key={cert.titulo}
-              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 hover:border-brand-blue/30 transition-all duration-300 hover:-translate-y-1"
+              className="w-full max-w-4xl bg-gray-50 border border-gray-100 rounded-3xl p-8 md:p-12 hover:border-brand-blue/30 transition-all duration-300 hover:-translate-y-1"
             >
-              <div className="w-16 h-16 rounded-2xl bg-brand-blue/20 flex items-center justify-center mb-6">
+              <div className="w-16 h-16 rounded-2xl bg-brand-blue/10 flex items-center justify-center mb-6">
                 <cert.icon
                   size={32}
                   className="text-brand-blue"
                   strokeWidth={2}
                 />
               </div>
-              <h3 className="font-display text-2xl font-bold text-white mb-2">
+              <h3 className="font-display text-2xl font-bold text-brand-navy mb-2">
                 {cert.titulo}
               </h3>
-              <p className="font-body text-sm text-white/60 leading-relaxed mb-4">
+              <p className="font-body text-sm text-gray-500 leading-relaxed mb-4">
                 {cert.desc}
               </p>
               <span className="inline-flex items-center gap-1 font-body text-xs text-brand-blue uppercase tracking-wider">

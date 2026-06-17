@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import useInView from '../hooks/useInView'
+
 const trabajos = [
   {
     icon: (
@@ -7,6 +10,7 @@ const trabajos = [
     ),
     titulo: 'Sala residencial',
     tipo: 'Limpieza profunda',
+    slug: 'sala-residencial',
   },
   {
     icon: (
@@ -17,6 +21,7 @@ const trabajos = [
     ),
     titulo: 'Cocina industrial',
     tipo: 'Desengrasado',
+    slug: 'cocina-industrial',
   },
   {
     icon: (
@@ -26,6 +31,7 @@ const trabajos = [
     ),
     titulo: 'Oficina corporativa',
     tipo: 'Mantenimiento',
+    slug: 'oficina-corporativa',
   },
   {
     icon: (
@@ -35,6 +41,7 @@ const trabajos = [
     ),
     titulo: 'Baño completo',
     tipo: 'Sanitización',
+    slug: 'bano-completo',
   },
   {
     icon: (
@@ -44,6 +51,7 @@ const trabajos = [
     ),
     titulo: 'Fachada de vidrios',
     tipo: 'Limpieza exterior',
+    slug: 'fachada-vidrios',
   },
   {
     icon: (
@@ -53,14 +61,92 @@ const trabajos = [
     ),
     titulo: 'Post-remodelación',
     tipo: 'Limpieza post-obra',
+    slug: 'post-remodelacion',
   },
 ]
 
-export default function Galeria() {
+function BeforeAfterSlider() {
+  const [pos, setPos] = useState(50)
+  const [imgError, setImgError] = useState(false)
+
+  if (imgError) {
+    return (
+      <div className="grid grid-cols-2 gap-3">
+        {['Antes', 'Después'].map((label, i) => (
+          <div
+            key={label}
+            className="aspect-square rounded-2xl bg-white/10 border border-white/20 flex flex-col items-center justify-center gap-2"
+          >
+            {i === 0 ? (
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-white/70" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 16.318A4.486 4.486 0 0012.016 15a4.486 4.486 0 00-3.198 1.318M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75s.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-white" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75s.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
+              </svg>
+            )}
+            <span className="font-display text-white font-bold text-sm">
+              {label}
+            </span>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
   return (
-    <section id="galeria" className="py-24 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+    <div className="relative aspect-square rounded-2xl overflow-hidden select-none bg-white/5">
+      <img
+        src="/galeria/antes-despues/sala-residencial_despues.webp"
+        alt="Después"
+        className="absolute inset-0 w-full h-full object-cover"
+        onError={() => setImgError(true)}
+      />
+      {pos > 0 && (
+        <div
+          className="absolute inset-0"
+          style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
+        >
+          <img
+            src="/galeria/antes-despues/sala-residencial_antes.webp"
+            alt="Antes"
+            className="w-full h-full object-cover"
+            onError={() => setImgError(true)}
+          />
+        </div>
+      )}
+      <div
+        className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg z-20 pointer-events-none"
+        style={{ left: `${pos}%`, transform: 'translateX(-50%)' }}
+      />
+      <div
+        className="absolute top-1/2 w-9 h-9 rounded-full bg-white shadow-lg z-20 pointer-events-none flex items-center justify-center"
+        style={{ left: `${pos}%`, transform: 'translate(-50%, -50%)' }}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 text-brand-navy">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+        </svg>
+      </div>
+      <input
+        type="range"
+        min="0"
+        max="100"
+        value={pos}
+        onChange={e => setPos(Number(e.target.value))}
+        className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30"
+        aria-label="Comparar antes y después"
+      />
+    </div>
+  )
+}
+
+export default function Galeria() {
+  const [ref, inView] = useInView()
+  return (
+    <section id="galeria" className="py-24 bg-white relative shadow-[0_-6px_20px_-6px_rgba(0,0,0,0.08)]">
+      <div ref={ref} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={`text-center max-w-2xl mx-auto mb-16 transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`}>
           <span className="font-body text-brand-blue font-semibold text-sm uppercase tracking-widest">
             Nuestro trabajo
           </span>
@@ -74,7 +160,7 @@ export default function Galeria() {
           </p>
         </div>
 
-        <div className="bg-gradient-to-r from-brand-navy to-brand-mid rounded-3xl p-8 mb-12 overflow-hidden relative">
+        <div className={`bg-gradient-to-r from-brand-navy to-brand-mid rounded-3xl p-8 mb-12 overflow-hidden relative transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
           <div
             className="absolute inset-0 opacity-10"
             style={{
@@ -107,41 +193,27 @@ export default function Galeria() {
               </a>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              {['Antes', 'Después'].map((label, i) => (
-                <div
-                  key={label}
-                  className="aspect-square rounded-2xl bg-white/10 border border-white/20 flex flex-col items-center justify-center gap-2"
-                >
-                  {i === 0 ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-white/70" aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 16.318A4.486 4.486 0 0012.016 15a4.486 4.486 0 00-3.198 1.318M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75s.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
-                    </svg>
-                  ) : (
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-white" aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75s.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
-                    </svg>
-                  )}
-                  <span className="font-display text-white font-bold text-sm">
-                    {label}
-                  </span>
-                </div>
-              ))}
-            </div>
+            <BeforeAfterSlider />
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className={`grid grid-cols-2 md:grid-cols-3 gap-4 transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '400ms' }}>
           {trabajos.map((t) => (
             <div
               key={t.titulo}
-              className="group aspect-square bg-gray-50 rounded-2xl border border-gray-100 hover:border-brand-blue/30 flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:shadow-lg hover:shadow-brand-blue/10 hover:-translate-y-1 cursor-pointer"
+              className="group aspect-square bg-gray-50 rounded-2xl border border-gray-100 hover:border-brand-blue/30 flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:shadow-lg hover:shadow-brand-blue/10 hover:-translate-y-1 cursor-pointer relative overflow-hidden"
             >
-              <span className="text-brand-navy group-hover:text-brand-blue group-hover:scale-110 transition-all duration-200">
+              <img
+                src={`/galeria/thumbnails/${t.slug}.webp`}
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-20 transition-opacity duration-300"
+                onError={(e) => { e.currentTarget.style.display = 'none' }}
+              />
+              <span className="relative z-10 text-brand-navy group-hover:text-brand-blue group-hover:scale-110 transition-all duration-200">
                 {t.icon}
               </span>
 
-              <div className="text-center px-3">
+              <div className="relative z-10 text-center px-3">
                 <p className="font-display text-sm font-bold text-brand-navy group-hover:text-brand-blue transition-colors">
                   {t.titulo}
                 </p>
@@ -153,7 +225,7 @@ export default function Galeria() {
           ))}
         </div>
 
-        <p className="text-center font-body text-sm text-gray-400 mt-8 inline-flex items-center gap-2 w-full justify-center">
+        <p className={`text-center font-body text-sm text-gray-400 mt-8 inline-flex items-center gap-2 w-full justify-center transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '600ms' }}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
             <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />

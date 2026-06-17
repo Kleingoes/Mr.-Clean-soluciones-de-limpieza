@@ -12,6 +12,7 @@ import {
   AirVent,
   Square
 } from 'lucide-react'
+import useInView from '../hooks/useInView'
 
 const servicios = [
   {
@@ -77,12 +78,13 @@ const servicios = [
 ]
 
 export default function Servicios() {
+  const [ref, inView] = useInView()
   return (
-    <section id="servicios" className="py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="servicios" className="py-24 bg-gray-50 relative shadow-[0_-6px_20px_-6px_rgba(0,0,0,0.08)]">
+      <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`}>
           <span className="font-body text-brand-blue font-semibold text-sm uppercase tracking-widest">
             Lo que hacemos
           </span>
@@ -99,7 +101,7 @@ export default function Servicios() {
         </div>
 
         {/* Grid */}
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className={`grid md:grid-cols-2 xl:grid-cols-3 gap-6 transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
           {servicios.map((s) => (
             <div
               key={s.title}
@@ -126,7 +128,7 @@ export default function Servicios() {
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-14">
+        <div className={`text-center mt-14 transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '400ms' }}>
           <a
             href="#contacto"
             className="inline-flex items-center justify-center bg-brand-navy hover:bg-brand-mid text-white font-body font-semibold px-8 py-4 rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-brand-navy/30"

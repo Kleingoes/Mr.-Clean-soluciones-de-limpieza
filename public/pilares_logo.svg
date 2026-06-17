@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <style>
+      .lbl {
+        font-family: 'Arial', 'Helvetica', sans-serif;
+        font-weight: 700;
+        fill: #ffffff;
+        font-size: 26px;
+        letter-spacing: 2px;
+      }
+    </style>
+  </defs>
+
+  <!-- CALIDAD - top, light blue -->
+  <path d="M72.87,58.81 A190,190 0 0,1 327.13,58.81 L270.26,121.97 A105,105 0 0,0 129.74,121.97 Z" fill="#4FA8DD"/>
+
+  <!-- CONFIANZA - right, medium blue -->
+  <path d="M341.19,72.87 A190,190 0 0,1 341.19,327.13 L278.03,270.26 A105,105 0 0,0 278.03,129.74 Z" fill="#1F77B4"/>
+
+  <!-- SEGURIDAD - bottom, royal blue -->
+  <path d="M327.13,341.19 A190,190 0 0,1 72.87,341.19 L129.74,278.03 A105,105 0 0,0 270.26,278.03 Z" fill="#1A56A8"/>
+
+  <!-- PRECIO - left, navy -->
+  <path d="M58.81,327.13 A190,190 0 0,1 58.81,72.87 L121.97,129.74 A105,105 0 0,0 121.97,270.26 Z" fill="#1B2D6B"/>
+
+  <!-- Labels -->
+  <text class="lbl" x="200" y="62" text-anchor="middle">CALIDAD</text>
+  <text class="lbl" x="200" y="338" text-anchor="middle">SEGURIDAD</text>
+  <text class="lbl" x="347" y="200" text-anchor="middle" transform="rotate(90 347,200)">CONFIANZA</text>
+  <text class="lbl" x="53" y="200" text-anchor="middle" transform="rotate(-90 53,200)">PRECIO</text>
+</svg>
