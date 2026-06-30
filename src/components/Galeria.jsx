@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import useInView from '../hooks/useInView'
 
 const trabajos = [
@@ -66,8 +66,45 @@ const trabajos = [
 ]
 
 function BeforeAfterSlider() {
-  const [pos, setPos] = useState(50)
+  const [progress, setProgress] = useState(0)
   const [imgError, setImgError] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
+  const progressRef = useRef(0)
+  const rafRef = useRef(null)
+
+  useEffect(() => {
+    const DURATION = 4000
+    let direction = 1
+    let lastTime = null
+
+    function animate(timestamp) {
+      if (lastTime === null) lastTime = timestamp
+      const delta = timestamp - lastTime
+      lastTime = timestamp
+      progressRef.current += (delta / DURATION) * 100 * direction
+      if (progressRef.current >= 100) {
+        progressRef.current = 100
+        direction = -1
+      } else if (progressRef.current <= 0) {
+        progressRef.current = 0
+        direction = 1
+      }
+      setProgress(progressRef.current)
+      rafRef.current = requestAnimationFrame(animate)
+    }
+
+    if (!isPaused) {
+      lastTime = null
+      rafRef.current = requestAnimationFrame(animate)
+    }
+
+    return () => {
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current)
+        rafRef.current = null
+      }
+    }
+  }, [isPaused])
 
   if (imgError) {
     return (
@@ -96,20 +133,24 @@ function BeforeAfterSlider() {
   }
 
   return (
-    <div className="relative aspect-square rounded-2xl overflow-hidden select-none bg-white/5">
+    <div
+      className="relative aspect-square rounded-2xl overflow-hidden select-none bg-white/5"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <img
-        src="/galeria/antes-despues/sala-residencial_despues.webp"
+        src="/galeria/antes-despues/proceso-limpieza_despues.webp"
         alt="Después"
         className="absolute inset-0 w-full h-full object-cover"
         onError={() => setImgError(true)}
       />
-      {pos > 0 && (
+      {progress > 0 && (
         <div
           className="absolute inset-0"
-          style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
+          style={{ clipPath: `inset(0 ${100 - progress}% 0 0)` }}
         >
           <img
-            src="/galeria/antes-despues/sala-residencial_antes.webp"
+            src="/galeria/antes-despues/proceso-limpieza_antes.webp"
             alt="Antes"
             className="w-full h-full object-cover"
             onError={() => setImgError(true)}
@@ -118,25 +159,16 @@ function BeforeAfterSlider() {
       )}
       <div
         className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg z-20 pointer-events-none"
-        style={{ left: `${pos}%`, transform: 'translateX(-50%)' }}
+        style={{ left: `${progress}%`, transform: 'translateX(-50%)' }}
       />
       <div
         className="absolute top-1/2 w-9 h-9 rounded-full bg-white shadow-lg z-20 pointer-events-none flex items-center justify-center"
-        style={{ left: `${pos}%`, transform: 'translate(-50%, -50%)' }}
+        style={{ left: `${progress}%`, transform: 'translate(-50%, -50%)' }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 text-brand-navy">
           <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
         </svg>
       </div>
-      <input
-        type="range"
-        min="0"
-        max="100"
-        value={pos}
-        onChange={e => setPos(Number(e.target.value))}
-        className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30"
-        aria-label="Comparar antes y después"
-      />
     </div>
   )
 }
@@ -181,8 +213,7 @@ export default function Galeria() {
               </h3>
 
               <p className="font-body text-white/60 text-sm leading-relaxed">
-                Nuestros clientes quedan sorprendidos con los resultados.
-                Pronto agregaremos fotos reales de nuestros trabajos más recientes.
+                Desliza el control para ver la transformación antes y después de nuestro servicio de limpieza profesional.
               </p>
 
               <a
@@ -201,14 +232,8 @@ export default function Galeria() {
           {trabajos.map((t) => (
             <div
               key={t.titulo}
-              className="group aspect-square bg-gray-50 rounded-2xl border border-gray-100 hover:border-brand-blue/30 flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:shadow-lg hover:shadow-brand-blue/10 hover:-translate-y-1 cursor-pointer relative overflow-hidden"
+              className="group aspect-square bg-gray-50 rounded-2xl border border-gray-100 hover:border-brand-blue/30 hover:bg-brand-light/20 flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:shadow-lg hover:shadow-brand-blue/10 hover:-translate-y-1 cursor-pointer relative overflow-hidden"
             >
-              <img
-                src={`/galeria/thumbnails/${t.slug}.webp`}
-                alt=""
-                className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-20 transition-opacity duration-300"
-                onError={(e) => { e.currentTarget.style.display = 'none' }}
-              />
               <span className="relative z-10 text-brand-navy group-hover:text-brand-blue group-hover:scale-110 transition-all duration-200">
                 {t.icon}
               </span>
@@ -225,13 +250,7 @@ export default function Galeria() {
           ))}
         </div>
 
-        <p className={`text-center font-body text-sm text-gray-400 mt-8 inline-flex items-center gap-2 w-full justify-center transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '600ms' }}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4" aria-hidden="true">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
-            <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
-          </svg>
-          Próximamente: galería fotográfica con trabajos reales de nuestro equipo.
-        </p>
+
       </div>
     </section>
   )

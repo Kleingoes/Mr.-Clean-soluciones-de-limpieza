@@ -1,15 +1,10 @@
 import { MessageCircle } from 'lucide-react'
-
-const WHATSAPP_NUMBER = '529XXXXXXXXX'
-
-const WHATSAPP_MSG = encodeURIComponent(
-  'Hola, me interesa contactarme  para servicio de limpieza.'
-)
+import { buildWhatsAppUrl } from '../utils.js'
 
 export default function WhatsAppFloat() {
   return (
     <a
-      href={`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`}
+      href={buildWhatsAppUrl()}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contactar por WhatsApp"

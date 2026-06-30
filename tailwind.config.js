@@ -19,9 +19,11 @@ export default {
         body:    ['"DM Sans"', 'sans-serif'],
       },
       animation: {
-        'fade-up':    'fadeUp 0.6s ease forwards',
-        'fade-in':    'fadeIn 0.5s ease forwards',
-        'slide-left': 'slideLeft 0.6s ease forwards',
+        'fade-up':      'fadeUp 0.6s ease forwards',
+        'fade-in':      'fadeIn 0.5s ease forwards',
+        'slide-left':   'slideLeft 0.6s ease forwards',
+        'scroll-left':  'scrollLeft 35s linear infinite',
+        'scroll-right': 'scrollRight 35s linear infinite',
       },
       keyframes: {
         fadeUp: {
@@ -35,6 +37,14 @@ export default {
         slideLeft: {
           '0%':   { opacity: '0', transform: 'translateX(40px)' },
           '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        scrollLeft: {
+          '0%':   { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        scrollRight: {
+          '0%':   { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(0)' },
         },
       },
     },
