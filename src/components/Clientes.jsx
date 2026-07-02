@@ -42,8 +42,9 @@ function LogoRow({ logos, direction }) {
             className="flex-shrink-0 w-[88px] h-[88px] rounded-xl bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-300 hover:bg-brand-blue/10 hover:border-brand-blue/30 hover:-translate-y-0.5 group"
           >
             <img
-              src={`/logos/${logo.id}.${logo.ext || 'svg'}`}
+              src={`/logos/${logo.id}.webp`}
               alt={logo.nombre}
+              onError={(e) => { e.target.src = `/logos/${logo.id}.${logo.ext || 'svg'}` }}
               className="h-10 w-10 object-contain opacity-70 transition-all duration-300 group-hover:opacity-100"
             />
           </div>

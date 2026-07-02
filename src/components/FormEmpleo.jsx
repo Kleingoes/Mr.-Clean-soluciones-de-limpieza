@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { Briefcase, Loader2, CheckCircle2, XCircle } from 'lucide-react'
-import { buildEmpleoWhatsAppText, validateForm, sanitizeText } from '../utils.js'
+import { buildEmpleoWhatsAppText, validateForm, stripHtml } from '../utils.js'
 import { submitToBoth, renderField, renderTextarea, renderRadio, FormCard } from './formHelpers.jsx'
 
 const INITIAL = {
@@ -12,11 +12,12 @@ export default function FormEmpleo() {
   const [form, setForm] = useState(INITIAL)
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle')
-  const formLoadTime = useRef(Date.now())
+  const [formLoadTime] = useState(() => Date.now())
   const [lastSubmit, setLastSubmit] = useState(() => {
     const stored = sessionStorage.getItem('empleo_lastSubmit')
     return stored ? parseInt(stored, 10) : 0
   })
+  const lastSubmitRef = useRef(lastSubmit)
 
   const setField = (field) => (e) => {
     setForm((prev) => ({ ...prev, [field]: e.target.value }))
@@ -33,23 +34,25 @@ export default function FormEmpleo() {
       return
     }
 
-    if (Date.now() - formLoadTime.current < 4000) {
+    if (Date.now() - formLoadTime < 4000) {
       setStatus('error')
       return
     }
 
-    if (Date.now() - lastSubmit < 60000) {
+    if (Date.now() - lastSubmitRef.current < 60000) {
       setStatus('error')
       return
     }
 
-    const sanitized = { ...form, mensaje: sanitizeText(form.mensaje) }
+    const sanitized = { ...form, mensaje: stripHtml(form.mensaje) }
     const validation = validateForm(sanitized)
     setErrors(validation)
     if (Object.keys(validation).length > 0) return
 
-    sessionStorage.setItem('empleo_lastSubmit', Date.now().toString())
-    setLastSubmit(Date.now())
+    const now = Date.now()
+    sessionStorage.setItem('empleo_lastSubmit', now.toString())
+    setLastSubmit(now)
+    lastSubmitRef.current = now
     setStatus('submitting')
 
     try {

@@ -46,8 +46,9 @@ export default function Curriculum() {
               <div className="w-12 h-12 rounded-xl bg-brand-blue/20 flex items-center justify-center group-hover:bg-brand-blue/30 transition-colors">
                 {empresa.logo ? (
                   <img
-                    src={`/logos/${empresa.id}.${empresa.ext || 'svg'}`}
+                    src={`/logos/${empresa.id}.webp`}
                     alt={empresa.nombre}
+                    onError={(e) => { e.target.src = `/logos/${empresa.id}.${empresa.ext || 'svg'}` }}
                     className="h-8 w-auto object-contain opacity-70 transition-all duration-300 group-hover:opacity-100"
                   />
                 ) : (

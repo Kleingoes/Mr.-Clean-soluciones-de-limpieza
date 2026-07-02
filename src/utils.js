@@ -85,7 +85,7 @@ const JUNK_LOCAL_PATTERNS = [
   /^user/i, /^a$/i, /^\d+$/,
 ]
 
-const EMAIL_REGEX_STRICT = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/
+const EMAIL_REGEX_STRICT = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
 function validateEmail(email) {
   if (!email?.trim()) return 'El correo es obligatorio'
@@ -106,11 +106,9 @@ function validateEmail(email) {
   return null
 }
 
-export function sanitizeText(text) {
+export function stripHtml(text) {
   if (!text) return ''
-  const el = document.createElement('div')
-  el.textContent = text
-  return el.textContent
+  return text.replace(/<[^>]*>/g, '')
 }
 
 export function validateForm(values) {
