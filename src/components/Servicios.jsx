@@ -3,9 +3,7 @@ import {
   Home,
   Sparkles,
   ShieldCheck,
-  Droplets,
   Store,
-  Paintbrush,
   Glasses,
   Hospital,
   HardHat,
@@ -31,11 +29,6 @@ const servicios = [
     desc: 'Desinfección profesional para eliminar virus, bacterias y microorganismos.',
   },
   {
-    icon: Droplets,
-    title: 'Lavado de Tinacos y Cisternas',
-    desc: 'Limpieza y desinfección para garantizar agua limpia y segura.',
-  },
-  {
     icon: Sparkles,
     title: 'Lavado de Alfombras',
     desc: 'Limpieza profunda para eliminar manchas, polvo y malos olores.',
@@ -54,11 +47,6 @@ const servicios = [
     icon: Store,
     title: 'Limpieza de Locales Comerciales',
     desc: 'Mantenimiento y limpieza para negocios, tiendas y establecimientos comerciales.',
-  },
-  {
-    icon: Paintbrush,
-    title: 'Pintura de Fachadas e Interiores',
-    desc: 'Aplicación profesional de pintura para renovación y mantenimiento de espacios.',
   },
   {
     icon: Glasses,

@@ -54,7 +54,7 @@ export default function Navbar() {
             href="#contacto"
             className="hidden md:inline-flex items-center bg-brand-blue text-white px-5 py-2.5 rounded-full text-sm font-medium hover:opacity-90 transition"
           >
-            Solicitar cotización
+            Trabaja con nosotros
           </a>
 
           {/* Mobile button */}
@@ -131,7 +131,7 @@ export default function Navbar() {
               onClick={() => setOpen(false)}
               className="bg-brand-blue text-white text-center py-3 rounded-full"
             >
-              Solicitar cotización
+              Trabaja con nosotros
             </a>
 
           </div>

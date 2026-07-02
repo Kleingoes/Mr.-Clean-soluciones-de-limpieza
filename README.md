@@ -22,7 +22,7 @@ Landing page profesional para Mr. Clean — servicios de limpieza para hogares, 
 
 - **10 componentes** en `src/components/`: Navbar, Hero, Nosotros, Servicios, Galeria, Clientes, Curriculum, Certificaciones, Contacto, Footer, WhatsAppFloat, Modal
 - Hook personalizado `useInView` para animaciones con IntersectionObserver
-- Formulario de contacto conectado a **Web3Forms** (API key en `.env`)
+- Formularios de cotización y empleo conectados a **Web3Forms** (2 API keys en `.env` para redundancia)
 - Número de WhatsApp centralizado en `src/constants.js`
 - Botón flotante de WhatsApp con mensaje contextual según la sección
 
@@ -32,6 +32,7 @@ Copiar `.env` y reemplazar:
 
 ```
 VITE_WEB3FORMS_KEY=tu-access-key
+VITE_WEB3FORMS_KEY2=tu-segunda-access-key
 ```
 
-Registrarse gratis en [web3forms.com](https://web3forms.com) para obtener una key.
+Registrarse dos veces en [web3forms.com](https://web3forms.com) para obtener dos keys. El envío se duplica para mayor confiabilidad.

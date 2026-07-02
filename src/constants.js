@@ -1,10 +1,10 @@
 /* Compartidas */
-export const WHATSAPP_NUMBER = '529613062682'
+export const WHATSAPP_NUMBER = '529611556499'
 export const WHATSAPP_MSG_DEFAULT = 'Hola, me interesa solicitar una cotización para servicio de limpieza.'
 export const EMAIL = 'patycantoral@mrclean.com.mx'
 export const PHONE = '961 350 9260'
 export const COMPANY = 'Mr. Clean Soluciones de Limpieza'
 export const COMPANY_FULL = 'Mr. Clean — Melcon Suministros y Consultoría'
-export const LOCATION = 'Tuxtla Gutiérrez, Chiapas'
+export const LOCATION = 'Av. Río Blanco Lote 6, Manzana 12, Col. Los Laguitos, 29020 Tuxtla Gutiérrez, Chis., México'
 export const COVERAGE = 'Cobertura en todo el estado de Chiapas'
 export const HOURS = 'Lunes a Sábado · 08:00 AM - 06:00 PM'

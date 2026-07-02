@@ -56,19 +56,61 @@ export function buildCotizacionWhatsAppText({ nombre, telefono, correo, empresa,
   ].join('\n')
 }
 
-export function buildEmpleoWhatsAppText({ nombre, telefono, correo, puesto, experiencia, mensaje }) {
+export function buildEmpleoWhatsAppText({ nombre, telefono, correo, puesto, experiencia, edad, mensaje }) {
   return [
     'SOLICITUD DE EMPLEO',
     '',
     `Nombre: ${nombre}`,
     `Teléfono: ${telefono}`,
     `Correo: ${correo}`,
-    `Puesto deseado: ${puesto}`,
-    `Años de experiencia: ${experiencia}`,
+    `Puesto: ${puesto}`,
+    `Experiencia: ${experiencia}`,
+    `Edad: ${edad}`,
     '',
     'Mensaje:',
     mensaje,
   ].join('\n')
+}
+
+const FAKE_TLDS = new Set([
+  'tk', 'ml', 'ga', 'cf', 'gq', 'xyz', 'top', 'loan', 'bid',
+  'date', 'win', 'men', 'link', 'click', 'review', 'download',
+  'racing', 'stream', 'trade', 'webcam', 'science', 'work',
+  'party', 'country', 'gdn', 'mom', 'loan', 'xin', 'site',
+  'online', 'pw', 'website', 'space', 'tech', 'site',
+])
+
+const JUNK_LOCAL_PATTERNS = [
+  /^test/i, /^asdf/i, /^123\d*$/, /^prueba/i, /^correo/i,
+  /^user/i, /^a$/i, /^\d+$/,
+]
+
+const EMAIL_REGEX_STRICT = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/
+
+function validateEmail(email) {
+  if (!email?.trim()) return 'El correo es obligatorio'
+
+  const e = email.trim()
+
+  if (!EMAIL_REGEX_STRICT.test(e)) return 'Correo electrónico inválido'
+
+  const [local, domain] = e.split('@')
+  const tld = domain.split('.').pop().toLowerCase()
+
+  if (FAKE_TLDS.has(tld)) return 'Correo electrónico inválido'
+
+  if (JUNK_LOCAL_PATTERNS.some((p) => p.test(local))) return 'Correo electrónico inválido'
+
+  if (local.length < 2) return 'Correo electrónico inválido'
+
+  return null
+}
+
+export function sanitizeText(text) {
+  if (!text) return ''
+  const el = document.createElement('div')
+  el.textContent = text
+  return el.textContent
 }
 
 export function validateForm(values) {
@@ -76,16 +118,21 @@ export function validateForm(values) {
   if (!values.nombre?.trim() || values.nombre.trim().length < 2) {
     errors.nombre = 'El nombre debe tener al menos 2 caracteres'
   }
-  if (!values.correo?.trim()) {
-    errors.correo = 'El correo es obligatorio'
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.correo)) {
-    errors.correo = 'Correo electrónico inválido'
-  }
+  const emailError = validateEmail(values.correo)
+  if (emailError) errors.correo = emailError
   if (values.telefono?.trim() && !/^\d{10}$/.test(values.telefono.replace(/\D/g, ''))) {
     errors.telefono = 'El teléfono debe tener 10 dígitos'
   }
   if (!values.mensaje?.trim() || values.mensaje.trim().length < 10) {
     errors.mensaje = 'El mensaje debe tener al menos 10 caracteres'
+  }
+  if (values.edad !== undefined) {
+    const edadNum = parseInt(values.edad, 10)
+    if (!values.edad?.trim()) {
+      errors.edad = 'La edad es obligatoria'
+    } else if (isNaN(edadNum) || edadNum < 20 || edadNum > 50) {
+      errors.edad = 'La edad debe estar entre 20 y 50 años'
+    }
   }
   return errors
 }

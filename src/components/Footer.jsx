@@ -151,7 +151,7 @@ export default function Footer() {
               © {new Date().getFullYear()} {COMPANY}. Todos los derechos reservados.
             </p>
             <p className="font-body text-xs text-white/20">
-              Diseñado con ♥ en Chiapas, México
+              Desarrollado por KleinGoes
             </p>
           </div>
         </div>

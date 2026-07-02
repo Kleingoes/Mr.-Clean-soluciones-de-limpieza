@@ -39,8 +39,8 @@ const trabajos = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
       </svg>
     ),
-    titulo: 'Baño completo',
-    tipo: 'Sanitización',
+    titulo: 'Sanitización',
+    tipo: 'Eliminación de gérmenes',
     slug: 'bano-completo',
   },
   {
@@ -141,6 +141,7 @@ function BeforeAfterSlider() {
       <img
         src="/galeria/antes-despues/proceso-limpieza_despues.webp"
         alt="Después"
+        loading="lazy"
         className="absolute inset-0 w-full h-full object-cover"
         onError={() => setImgError(true)}
       />
@@ -152,6 +153,7 @@ function BeforeAfterSlider() {
           <img
             src="/galeria/antes-despues/proceso-limpieza_antes.webp"
             alt="Antes"
+            loading="lazy"
             className="w-full h-full object-cover"
             onError={() => setImgError(true)}
           />
@@ -175,6 +177,11 @@ function BeforeAfterSlider() {
 
 export default function Galeria() {
   const [ref, inView] = useInView()
+  const [imgErrors, setImgErrors] = useState({})
+
+  const handleImgError = (slug) => {
+    setImgErrors((prev) => ({ ...prev, [slug]: true }))
+  }
   return (
     <section id="galeria" className="py-24 bg-white relative shadow-[0_-6px_20px_-6px_rgba(0,0,0,0.08)]">
       <div ref={ref} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -232,17 +239,33 @@ export default function Galeria() {
           {trabajos.map((t) => (
             <div
               key={t.titulo}
-              className="group aspect-square bg-gray-50 rounded-2xl border border-gray-100 hover:border-brand-blue/30 hover:bg-brand-light/20 flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:shadow-lg hover:shadow-brand-blue/10 hover:-translate-y-1 cursor-pointer relative overflow-hidden"
+              className="group aspect-square rounded-2xl border border-gray-100 hover:border-brand-blue/30 flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:shadow-lg hover:shadow-brand-blue/10 hover:-translate-y-1 cursor-pointer relative overflow-hidden"
             >
-              <span className="relative z-10 text-brand-navy group-hover:text-brand-blue group-hover:scale-110 transition-all duration-200">
-                {t.icon}
-              </span>
+              {imgErrors[t.slug] ? (
+                <div className="absolute inset-0 bg-gray-50" />
+              ) : (
+                <img
+                  src={`/galeria/trabajos/${t.slug}.jpg`}
+                  alt={t.titulo}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  onError={() => handleImgError(t.slug)}
+                />
+              )}
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+              {imgErrors[t.slug] && (
+                <span className="relative z-10 text-brand-navy group-hover:text-brand-blue group-hover:scale-110 transition-all duration-200">
+                  {t.icon}
+                </span>
+              )}
 
               <div className="relative z-10 text-center px-3">
-                <p className="font-display text-sm font-bold text-brand-navy group-hover:text-brand-blue transition-colors">
+                <p className="font-display text-sm font-bold text-white group-hover:text-brand-blue transition-colors drop-shadow-sm">
                   {t.titulo}
                 </p>
-                <p className="font-body text-xs text-gray-400 mt-0.5">
+                <p className="font-body text-xs text-white/70 group-hover:text-white/90 mt-0.5 transition-colors">
                   {t.tipo}
                 </p>
               </div>

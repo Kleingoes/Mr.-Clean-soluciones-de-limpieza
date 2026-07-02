@@ -27,3 +27,10 @@ dist-ssr
 .env
 .env.local
 .env.*.local
+
+# AI agent files (not project-relevant)
+.opencode/
+AGENTS.md
+
+# School documents
+INFORME_PARCIAL.md
