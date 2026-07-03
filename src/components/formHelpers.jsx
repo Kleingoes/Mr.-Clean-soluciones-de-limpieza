@@ -3,6 +3,7 @@ export const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY
 export const WEB3FORMS_KEY2 = import.meta.env.VITE_WEB3FORMS_KEY2
 
 export const SERVICIOS = [
+  '★ Servicio de Limpieza Permanente (Recomendado)',
   'Pulido de Pisos',
   'Limpieza de Oficinas',
   'Lavado de Alfombras',
@@ -51,7 +52,7 @@ export function renderField({ name, label, type = 'text', placeholder, options, 
       <label htmlFor={name} className="font-body text-sm font-medium text-gray-500 mb-2">{label}</label>
       {options ? (
         <select id={name} name={name} value={form[name]} onChange={setField(name)} className={cls}>
-          <option value="">Selecciona un servicio</option>
+          <option value="">{placeholder || 'Selecciona un servicio'}</option>
           {options.map((o) => <option key={o}>{o}</option>)}
         </select>
       ) : (

@@ -50,7 +50,7 @@ export default function Hero() {
             {/* Subheading */}
             <p className="font-body text-lg text-white/60 max-w-md leading-relaxed">
               Más de 10 años brindando servicios especializados de limpieza,
-              sanitización y mantenimiento para hogares, oficinas, comercios, 
+              mantenimiento para hogares, oficinas, comercios, 
               hospitales e industrias.
             </p>
 
@@ -130,7 +130,7 @@ export default function Hero() {
                     Especialidades
                   </span>
                   <div className="flex flex-wrap gap-2">
-                    {['Hogar', 'Oficinas', 'Industria', 'Clínicas', 'Post-obra', 'Sanitización'].map((esp) => (
+                    {['Hogar', 'Oficinas', 'Industria', 'Clínicas', 'Post-obra'].map((esp) => (
                       <span
                         key={esp}
                         className="bg-brand-navy/60 border border-white/10 rounded-full px-4 py-1.5 text-xs text-white/80"

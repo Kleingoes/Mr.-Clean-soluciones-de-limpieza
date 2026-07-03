@@ -2,7 +2,6 @@ import {
   Building2,
   Home,
   Sparkles,
-  ShieldCheck,
   Store,
   Glasses,
   Hospital,
@@ -22,11 +21,6 @@ const servicios = [
     icon: Home,
     title: 'Limpieza de Casas y Departamentos',
     desc: 'Servicios residenciales adaptados a las necesidades de cada hogar.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Sanitización de Espacios',
-    desc: 'Desinfección profesional para eliminar virus, bacterias y microorganismos.',
   },
   {
     icon: Sparkles,
@@ -83,7 +77,7 @@ export default function Servicios() {
 
           <p className="font-body text-gray-500 mt-4 leading-relaxed">
             Ofrecemos soluciones profesionales de limpieza, mantenimiento y
-            sanitización para hogares, empresas, comercios e instalaciones
+            para hogares, empresas, comercios e instalaciones
             especializadas.
           </p>
         </div>
