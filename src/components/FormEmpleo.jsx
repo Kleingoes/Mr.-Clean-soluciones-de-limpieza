@@ -1,11 +1,15 @@
 import { useState, useRef } from 'react'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
 import { Briefcase, Loader2, CheckCircle2, XCircle } from 'lucide-react'
 import { buildEmpleoWhatsAppText, validateForm, stripHtml } from '../utils.js'
 import { submitToBoth, renderField, renderTextarea, renderRadio, FormCard } from './formHelpers.jsx'
 
+const HCAPTCHA_SITEKEY = '50b2fe65-b00b-4b9e-ad62-3ba471098be2'
+
 const INITIAL = {
   nombre: '', telefono: '', correo: '',
   puesto: 'Operador de limpieza', experiencia: '', edad: '', mensaje: '', website: '',
+  'h-captcha-response': '',
 }
 
 export default function FormEmpleo() {
@@ -18,6 +22,7 @@ export default function FormEmpleo() {
     return stored ? parseInt(stored, 10) : 0
   })
   const lastSubmitRef = useRef(lastSubmit)
+  const captchaRef = useRef(null)
 
   const setField = (field) => (e) => {
     setForm((prev) => ({ ...prev, [field]: e.target.value }))
@@ -44,6 +49,11 @@ export default function FormEmpleo() {
       return
     }
 
+    if (!form['h-captcha-response']) {
+      setStatus('error')
+      return
+    }
+
     const sanitized = { ...form, mensaje: stripHtml(form.mensaje) }
     const validation = validateForm(sanitized)
     setErrors(validation)
@@ -65,6 +75,7 @@ export default function FormEmpleo() {
       if (!ok) throw new Error('Error al enviar')
       setStatus('submitted')
       setForm(INITIAL)
+      captchaRef.current?.resetCaptcha()
     } catch {
       setStatus('error')
     }
@@ -129,6 +140,15 @@ export default function FormEmpleo() {
             })}
           </div>
           {renderTextarea({ ...fieldProps, name: 'mensaje', label: 'Mensaje *', placeholder: 'Cuéntanos sobre ti...', rows: 4 })}
+        </div>
+
+        <div className="w-full mt-6 flex justify-center">
+          <HCaptcha
+            ref={captchaRef}
+            sitekey={HCAPTCHA_SITEKEY}
+            onVerify={(token) => setForm((prev) => ({ ...prev, 'h-captcha-response': token }))}
+            reCaptchaCompat={false}
+          />
         </div>
 
         <div className="flex flex-col gap-3 mt-6">

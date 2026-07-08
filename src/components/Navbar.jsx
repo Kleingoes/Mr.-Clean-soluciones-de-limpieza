@@ -7,8 +7,8 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur border-b border-gray-100">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav className="h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav className="h-20 grid grid-cols-[auto_1fr_auto] items-center">
 
           <a href="#inicio" className="flex items-center gap-2">
             <img
@@ -20,36 +20,36 @@ export default function Navbar() {
           </a>
 
           {/* Desktop */}
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#inicio" className="font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
+          <div className="hidden lg:flex items-center justify-center gap-5 xl:gap-7">
+            <a href="#inicio" className="whitespace-nowrap font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
               Inicio
             </a>
 
-            <a href="#nosotros" className="font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
+            <a href="#nosotros" className="whitespace-nowrap font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
               Nosotros
             </a>
 
-            <a href="#servicios" className="font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
+            <a href="#servicios" className="whitespace-nowrap font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
               Servicios
             </a>
 
-            <a href="#galeria" className="font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
+            <a href="#galeria" className="whitespace-nowrap font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
               Galería
             </a>
 
-            <a href="#nuestros-clientes" className="font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
+            <a href="#nuestros-clientes" className="whitespace-nowrap font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
               Nuestros Clientes
             </a>
 
-            <a href="#cotizacion" className="font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
+            <a href="#cotizacion" className="whitespace-nowrap font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
               Cotización
             </a>
 
-            <a href="#trabaja-con-nosotros" className="font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
+            <a href="#trabaja-con-nosotros" className="whitespace-nowrap font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
               Trabaja con nosotros
             </a>
 
-            <a href="#contacto" className="font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
+            <a href="#contacto" className="whitespace-nowrap font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
               Contacto
             </a>
           </div>
@@ -57,7 +57,7 @@ export default function Navbar() {
           {/* Mobile button */}
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden text-brand-navy"
+            className="lg:hidden text-brand-navy"
             aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={open}
           >
@@ -67,7 +67,7 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {open && (
-          <nav className="md:hidden pb-4 flex flex-col gap-4">
+          <nav className="lg:hidden pb-4 flex flex-col gap-4">
 
             <a
               href="#inicio"
