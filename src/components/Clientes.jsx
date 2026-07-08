@@ -57,7 +57,7 @@ function LogoRow({ logos, direction }) {
 export default function Clientes() {
   const [ref, inView] = useInView()
   return (
-    <section id="clientes" className="py-24 bg-brand-navy relative shadow-[0_-6px_20px_-6px_rgba(0,0,0,0.3)] overflow-hidden">
+    <section id="nuestros-clientes" className="py-24 bg-brand-navy relative shadow-[0_-6px_20px_-6px_rgba(0,0,0,0.3)] overflow-hidden">
       <div ref={ref} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`text-center max-w-2xl mx-auto mb-16 transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`}>
           <span className="font-body text-brand-blue font-semibold text-sm uppercase tracking-widest">

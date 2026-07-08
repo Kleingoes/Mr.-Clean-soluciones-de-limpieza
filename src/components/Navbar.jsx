@@ -37,25 +37,22 @@ export default function Navbar() {
               Galería
             </a>
 
-            <a href="#empresas" className="font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
-              Empresas
+            <a href="#nuestros-clientes" className="font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
+              Nuestros Clientes
             </a>
 
-            <a href="#certificaciones" className="font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
-              Certificaciones
+            <a href="#cotizacion" className="font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
+              Cotización
+            </a>
+
+            <a href="#trabaja-con-nosotros" className="font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
+              Trabaja con nosotros
             </a>
 
             <a href="#contacto" className="font-body text-sm text-gray-600 hover:text-brand-blue transition-colors">
               Contacto
             </a>
           </div>
-
-          <a
-            href="#contacto"
-            className="hidden md:inline-flex items-center bg-brand-blue text-white px-5 py-2.5 rounded-full text-sm font-medium hover:opacity-90 transition"
-          >
-            Trabaja con nosotros
-          </a>
 
           {/* Mobile button */}
           <button
@@ -70,7 +67,7 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {open && (
-          <div className="md:hidden pb-4 flex flex-col gap-4">
+          <nav className="md:hidden pb-4 flex flex-col gap-4">
 
             <a
               href="#inicio"
@@ -105,19 +102,27 @@ export default function Navbar() {
             </a>
 
             <a
-              href="#empresas"
+              href="#nuestros-clientes"
               onClick={() => setOpen(false)}
               className="text-gray-700"
             >
-              Empresas
+              Nuestros Clientes
             </a>
 
             <a
-              href="#certificaciones"
+              href="#cotizacion"
               onClick={() => setOpen(false)}
               className="text-gray-700"
             >
-              Certificaciones
+              Cotización
+            </a>
+
+            <a
+              href="#trabaja-con-nosotros"
+              onClick={() => setOpen(false)}
+              className="text-gray-700"
+            >
+              Trabaja con nosotros
             </a>
 
             <a
@@ -128,15 +133,7 @@ export default function Navbar() {
               Contacto
             </a>
 
-            <a
-              href="#contacto"
-              onClick={() => setOpen(false)}
-              className="bg-brand-blue text-white text-center py-3 rounded-full"
-            >
-              Trabaja con nosotros
-            </a>
-
-          </div>
+          </nav>
         )}
       </div>
     </header>

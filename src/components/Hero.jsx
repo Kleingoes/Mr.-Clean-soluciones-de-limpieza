@@ -4,12 +4,21 @@
   ShieldCheck,
   MapPin
 } from 'lucide-react'
+import heroImage from '../assets/hero-cleaning.jpg'
 export default function Hero() {
   return (
     <section
       id="inicio"
       className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-brand-navy"
     >
+      {/* Imagen de fondo */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${heroImage})` }}
+      />
+      {/* Overlay para mantener contraste y la paleta navy */}
+      <div className="absolute inset-0 bg-brand-navy/85" />
+
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Large glow top-right */}
@@ -49,7 +58,7 @@ export default function Hero() {
 
             {/* Subheading */}
             <p className="font-body text-lg text-white/60 max-w-md leading-relaxed">
-              Más de 10 años brindando servicios especializados de limpieza,
+              Más de 15 años brindando servicios especializados de limpieza,
               mantenimiento para hogares, oficinas, comercios, 
               hospitales e industrias.
             </p>
@@ -57,7 +66,7 @@ export default function Hero() {
             {/* Stats row */}
             <div className="flex items-center gap-8 py-2">
               {[
-                { value: '10+', label: 'Años de experiencia' },
+                { value: '15+', label: 'Años de experiencia' },
                 { value: '100%', label: 'Compromiso' },
                 { value: '24/7', label: 'Atencion' },
               ].map(stat => (
@@ -71,7 +80,7 @@ export default function Hero() {
             {/* CTAs */}
             <div className="flex flex-wrap gap-3 pt-2">
               <a
-                href="#contacto"
+                href="#cotizacion"
                 className="inline-flex items-center gap-2 bg-brand-blue hover:bg-brand-mid text-white font-body font-semibold px-7 py-3.5 rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-brand-blue/30 hover:-translate-y-0.5"
               >
                 Solicitar cotización
@@ -83,7 +92,7 @@ export default function Hero() {
                 Ver servicios
               </a>
               <a
-                href="#contacto"
+                href="#trabaja-con-nosotros"
                 className="inline-flex items-center gap-2 border border-white/20 hover:border-brand-blue/50 text-white/80 hover:text-white font-body font-medium px-7 py-3.5 rounded-full transition-all duration-200 hover:bg-white/5"
               >
                 Trabaja con nosotros

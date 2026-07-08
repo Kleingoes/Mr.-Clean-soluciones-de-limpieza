@@ -112,7 +112,7 @@ export default function Servicios() {
         {/* CTA */}
         <div className={`text-center mt-14 transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '400ms' }}>
           <a
-            href="#contacto"
+            href="#cotizacion"
             className="inline-flex items-center justify-center bg-brand-navy hover:bg-brand-mid text-white font-body font-semibold px-8 py-4 rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-brand-navy/30"
           >
             Solicitar una cotización

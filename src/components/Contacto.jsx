@@ -1,8 +1,6 @@
 import { MessageCircle, ChevronRight, Phone, Mail, MapPin, Clock } from 'lucide-react'
 import useInView from '../hooks/useInView'
-import { WHATSAPP_NUMBER, EMAIL, PHONE, LOCATION } from '../constants.js'
-import FormEmpleo from './FormEmpleo.jsx'
-import FormCotizacion from './FormCotizacion.jsx'
+import { WHATSAPP_NUMBER, EMAIL, PHONE, LOCATION, MAP_QUERY } from '../constants.js'
 
 const infoItems = [
   { icon: Phone, label: 'Teléfono', value: PHONE, sub: 'Llámanos en horario de oficina' },
@@ -25,16 +23,11 @@ export default function Contacto() {
             ¿Listo para un espacio <span className="text-brand-blue">impecable?</span>
           </h2>
           <p className="font-body text-gray-500 mt-4">
-            Solicita tu cotización y recibe atención personalizada para hogares, oficinas e industrias.
+            Estamos ubicados en Tuxtla Gutiérrez con cobertura en todo el estado de Chiapas.
           </p>
         </div>
 
-        <div className={`grid lg:grid-cols-2 gap-8 transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
-          <FormEmpleo />
-          <FormCotizacion />
-        </div>
-
-        <div className={`mx-auto max-w-2xl mt-20 flex flex-col gap-8 transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '400ms' }}>
+        <div className={`mx-auto max-w-2xl flex flex-col gap-8 transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
           <a
             href={`https://wa.me/${WHATSAPP_NUMBER}`}
             target="_blank"
@@ -62,6 +55,20 @@ export default function Contacto() {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Mapa de ubicación */}
+          <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+            <iframe
+              title="Ubicación Mr. Clean"
+              src={`https://www.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}&output=embed`}
+              width="100%"
+              height="350"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </div>
       </div>

@@ -5,13 +5,19 @@ import { WHATSAPP_MSG_DEFAULT, COMPANY, COMPANY_FULL } from '../constants.js'
 import { buildWhatsAppUrl } from '../utils.js'
 import Modal from './Modal.jsx'
 
-const navItems = [
-  'Inicio', 'Nosotros', 'Servicios', 'Galería', 'Empresas',
-  'Certificaciones', 'Contacto',
+const navLinks = [
+  { label: 'Inicio', href: '#inicio' },
+  { label: 'Nosotros', href: '#nosotros' },
+  { label: 'Servicios', href: '#servicios' },
+  { label: 'Galería', href: '#galeria' },
+  { label: 'Nuestros Clientes', href: '#nuestros-clientes' },
+  { label: 'Cotización', href: '#cotizacion' },
+  { label: 'Trabaja con nosotros', href: '#trabaja-con-nosotros' },
+  { label: 'Contacto', href: '#contacto' },
 ]
 
 const serviceLinks = [
-  'Residencial', 'Corporativo', 'Profunda', 'Sanitización', 'Vidrios', 'Post-obra',
+  'Residencial', 'Corporativo', 'Profunda', 'Vidrios', 'Post-obra',
 ]
 
 const legalLinks = [
@@ -97,13 +103,13 @@ export default function Footer() {
             <div>
               <p className="font-body text-xs uppercase tracking-widest text-white/40 mb-4">Navegación</p>
               <ul className="flex flex-col gap-2">
-                {navItems.map((item) => (
-                  <li key={item}>
+                {navLinks.map((link) => (
+                  <li key={link.label}>
                     <a
-                      href={`#${item.toLowerCase()}`}
+                      href={link.href}
                       className="font-body text-sm text-white/60 hover:text-brand-blue transition-colors"
                     >
-                      {item}
+                      {link.label}
                     </a>
                   </li>
                 ))}

@@ -34,3 +34,4 @@
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #f1f1f1; }
 ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+html { scrollbar-width: thin; scrollbar-color: var(--blue) #f1f1f1; }

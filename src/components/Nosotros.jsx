@@ -1,7 +1,8 @@
 import {
   CheckCircle2,
   ShieldCheck,
-  Award
+  Award,
+  BadgeCheck
 } from 'lucide-react'
 import useInView from '../hooks/useInView'
 
@@ -53,7 +54,7 @@ export default function Nosotros() {
 
               <div>
                 <p className="font-display text-xl font-bold text-brand-navy leading-none">
-                  +10 años
+                  +15 años
                 </p>
 
                 <p className="font-body text-xs text-gray-500 mt-0.5">
@@ -182,10 +183,31 @@ export default function Nosotros() {
 
             </ul>
 
+            {/* Certificación REPSE */}
+            <div className="bg-brand-blue/5 border border-brand-blue/20 rounded-2xl p-5">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center flex-shrink-0">
+                  <ShieldCheck size={26} className="text-brand-blue" />
+                </div>
+                <div>
+                  <h3 className="font-display text-lg font-bold text-brand-navy mb-1">
+                    REPSE
+                  </h3>
+                  <p className="font-body text-sm text-gray-600 leading-relaxed">
+                    Registro de Prestadoras de Servicios Especializados ante la Secretaría del Trabajo y Previsión Social (STPS). Cumplimos con todas las obligaciones laborales, fiscales y de seguridad social que exige la ley.
+                  </p>
+                  <span className="inline-flex items-center gap-1 font-body text-xs text-brand-blue uppercase tracking-wider mt-2">
+                    <BadgeCheck size={14} />
+                    STPS
+                  </span>
+                </div>
+              </div>
+            </div>
+
           </div>
 
         </div>
       </div>
-    </section>
+    </section> 
   )
 }

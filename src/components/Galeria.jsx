@@ -214,7 +214,7 @@ export default function Galeria() {
               </p>
 
               <a
-                href="#contacto"
+                href="#cotizacion"
                 className="inline-flex items-center gap-2 mt-5 bg-white text-brand-navy font-body font-semibold text-sm px-6 py-3 rounded-full hover:bg-brand-light transition-colors"
               >
                 ¡Quiero ese resultado!
@@ -225,7 +225,7 @@ export default function Galeria() {
           </div>
         </div>
 
-        <div className={`grid grid-cols-2 md:grid-cols-3 gap-4 transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '400ms' }}>
+        <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '400ms' }}>
           {trabajos.map((t) => (
             <div
               key={t.titulo}
