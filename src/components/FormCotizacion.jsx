@@ -65,12 +65,14 @@ export default function FormCotizacion() {
         from_name: sanitized.nombre,
         email: sanitized.correo,
         message: buildCotizacionWhatsAppText(sanitized),
+        'h-captcha-response': sanitized['h-captcha-response'],
       })
       if (!ok) throw new Error('Error al enviar')
       setStatus('submitted')
       setForm(INITIAL)
       captchaRef.current?.resetCaptcha()
-    } catch {
+    } catch (err) {
+      console.error('Error al enviar cotización:', err)
       setStatus('error-server')
     }
   }

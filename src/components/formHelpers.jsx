@@ -20,13 +20,11 @@ export async function submitToBoth(payload) {
   const results = await Promise.allSettled([
     fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ access_key: WEB3FORMS_KEY, ...payload }),
+      body: new URLSearchParams({ access_key: WEB3FORMS_KEY, ...payload }),
     }),
     fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ access_key: WEB3FORMS_KEY2, ...payload }),
+      body: new URLSearchParams({ access_key: WEB3FORMS_KEY2, ...payload }),
     }),
   ])
   return results.some(r => r.status === 'fulfilled' && r.value.ok)
