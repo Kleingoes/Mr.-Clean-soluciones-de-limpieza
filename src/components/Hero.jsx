@@ -15,6 +15,8 @@ export default function Hero() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${heroImage})` }}
+        role="img"
+        aria-label="Servicios de limpieza profesional Mr. Clean"
       />
       {/* Overlay para mantener contraste y la paleta navy */}
       <div className="absolute inset-0 bg-brand-navy/85" />

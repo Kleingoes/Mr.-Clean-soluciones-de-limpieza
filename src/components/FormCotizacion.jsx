@@ -34,23 +34,17 @@ export default function FormCotizacion() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (form.website?.trim()) {
-      setStatus('error')
-      return
-    }
+    if (form.website?.trim()) return
 
-    if (Date.now() - formLoadTime < 4000) {
-      setStatus('error')
-      return
-    }
+    if (Date.now() - formLoadTime < 4000) return
 
     if (Date.now() - lastSubmitRef.current < 60000) {
-      setStatus('error')
+      setStatus('error-rate-limit')
       return
     }
 
     if (!form['h-captcha-response']) {
-      setStatus('error')
+      setStatus('error-captcha')
       return
     }
 
@@ -77,7 +71,7 @@ export default function FormCotizacion() {
       setForm(INITIAL)
       captchaRef.current?.resetCaptcha()
     } catch {
-      setStatus('error')
+      setStatus('error-server')
     }
   }
 
@@ -97,7 +91,27 @@ export default function FormCotizacion() {
         </div>
       )}
 
-      {status === 'error' && (
+      {status === 'error-captcha' && (
+        <div className="mb-5 flex items-start gap-3 bg-red-50 border border-red-200 rounded-xl p-4">
+          <XCircle size={20} className="text-red-500 flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="font-body font-semibold text-red-800 text-sm">Captcha requerido</p>
+            <p className="font-body text-red-700 text-xs mt-1">Por favor completa la verificación antes de enviar.</p>
+          </div>
+        </div>
+      )}
+
+      {status === 'error-rate-limit' && (
+        <div className="mb-5 flex items-start gap-3 bg-red-50 border border-red-200 rounded-xl p-4">
+          <XCircle size={20} className="text-red-500 flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="font-body font-semibold text-red-800 text-sm">Espera un momento</p>
+            <p className="font-body text-red-700 text-xs mt-1">Debes esperar al menos 60 segundos entre envíos.</p>
+          </div>
+        </div>
+      )}
+
+      {status === 'error-server' && (
         <div className="mb-5 flex items-start gap-3 bg-red-50 border border-red-200 rounded-xl p-4">
           <XCircle size={20} className="text-red-500 flex-shrink-0 mt-0.5" />
           <div>

@@ -76,7 +76,7 @@ export default function Servicios() {
           </h2>
 
           <p className="font-body text-gray-500 mt-4 leading-relaxed">
-            Ofrecemos soluciones profesionales de limpieza, mantenimiento y
+            Ofrecemos soluciones profesionales de limpieza y mantenimiento
             para hogares, empresas, comercios e instalaciones
             especializadas.
           </p>

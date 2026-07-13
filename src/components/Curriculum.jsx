@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Building2 } from 'lucide-react'
 import useInView from '../hooks/useInView'
 
@@ -20,6 +21,13 @@ const curriculum = [
 
 export default function Curriculum() {
   const [ref, inView] = useInView()
+  const [fallbacks, setFallbacks] = useState({})
+
+  const handleError = (empresa) => {
+    if (fallbacks[empresa.id]) return
+    setFallbacks((prev) => ({ ...prev, [empresa.id]: true }))
+  }
+
   return (
     <section id="empresas" className="py-24 bg-brand-navy relative shadow-[0_-6px_20px_-6px_rgba(0,0,0,0.3)]">
       <div ref={ref} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,9 +54,9 @@ export default function Curriculum() {
               <div className="w-12 h-12 rounded-xl bg-brand-blue/20 flex items-center justify-center group-hover:bg-brand-blue/30 transition-colors">
                 {empresa.logo ? (
                   <img
-                    src={`/logos/${empresa.id}.webp`}
+                    src={fallbacks[empresa.id] ? `/logos/${empresa.id}.${empresa.ext || 'svg'}` : `/logos/${empresa.id}.webp`}
                     alt={empresa.nombre}
-                    onError={(e) => { e.target.src = `/logos/${empresa.id}.${empresa.ext || 'svg'}` }}
+                    onError={() => handleError(empresa)}
                     className="h-8 w-auto object-contain opacity-70 transition-all duration-300 group-hover:opacity-100"
                   />
                 ) : (

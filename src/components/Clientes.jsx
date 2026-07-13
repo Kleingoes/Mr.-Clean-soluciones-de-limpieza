@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import useInView from '../hooks/useInView'
 
 const grupoA = [
@@ -31,20 +32,28 @@ const grupoB = [
 
 function LogoRow({ logos, direction }) {
   const items = [...logos, ...logos]
+  const [fallbacks, setFallbacks] = useState({})
+
+  const handleError = (logo, i) => {
+    const key = `${logo.id}-${i}`
+    if (fallbacks[key]) return
+    setFallbacks((prev) => ({ ...prev, [key]: true }))
+  }
+
   return (
     <div className="relative overflow-hidden">
-      <div className="absolute inset-y-0 left-0 w-24 z-10 bg-gradient-to-r from-brand-navy to-transparent pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-24 z-10 bg-gradient-to-l from-brand-navy to-transparent pointer-events-none" />
+      <div className="absolute inset-y-0 left-0 w-24 z-10 bg-gradient-to-r from-gray-50 to-transparent pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-24 z-10 bg-gradient-to-l from-gray-50 to-transparent pointer-events-none" />
       <div className={`flex gap-4 py-2 ${direction === 'left' ? 'animate-scroll-left' : 'animate-scroll-right'} hover:[animation-play-state:paused]`}>
         {items.map((logo, i) => (
           <div
             key={`${logo.id}-${i}`}
-            className="flex-shrink-0 w-[88px] h-[88px] rounded-xl bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-300 hover:bg-brand-blue/10 hover:border-brand-blue/30 hover:-translate-y-0.5 group"
+            className="flex-shrink-0 w-[88px] h-[88px] rounded-xl bg-white border border-gray-200 flex items-center justify-center transition-all duration-300 hover:bg-brand-blue/10 hover:border-brand-blue/30 hover:-translate-y-0.5 group"
           >
             <img
-              src={`/logos/${logo.id}.webp`}
+              src={fallbacks[`${logo.id}-${i}`] ? `/logos/${logo.id}.${logo.ext || 'svg'}` : `/logos/${logo.id}.webp`}
               alt={logo.nombre}
-              onError={(e) => { e.target.src = `/logos/${logo.id}.${logo.ext || 'svg'}` }}
+              onError={() => handleError(logo, i)}
               className="h-10 w-10 object-contain opacity-70 transition-all duration-300 group-hover:opacity-100"
             />
           </div>
@@ -57,17 +66,17 @@ function LogoRow({ logos, direction }) {
 export default function Clientes() {
   const [ref, inView] = useInView()
   return (
-    <section id="nuestros-clientes" className="py-24 bg-brand-navy relative shadow-[0_-6px_20px_-6px_rgba(0,0,0,0.3)] overflow-hidden">
+    <section id="nuestros-clientes" className="py-24 bg-gray-50 relative shadow-[0_-6px_20px_-6px_rgba(0,0,0,0.08)] overflow-hidden">
       <div ref={ref} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`text-center max-w-2xl mx-auto mb-16 transition-all duration-700 ease-out ${inView ? '' : 'opacity-0 translate-y-8'}`}>
           <span className="font-body text-brand-blue font-semibold text-sm uppercase tracking-widest">
             Nuestros clientes
           </span>
-          <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-white mt-2 leading-tight">
+          <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-brand-navy mt-2 leading-tight">
             Clientes{' '}
             <span className="text-brand-blue">que confían en nosotros</span>
           </h2>
-          <p className="font-body text-white/50 mt-4">
+          <p className="font-body text-gray-500 mt-4">
             Más de 20 empresas en todo el país confían en Mr. Clean para
             mantener sus espacios impecables.
           </p>

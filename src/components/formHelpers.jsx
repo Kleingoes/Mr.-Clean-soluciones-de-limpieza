@@ -29,7 +29,7 @@ export async function submitToBoth(payload) {
       body: JSON.stringify({ access_key: WEB3FORMS_KEY2, ...payload }),
     }),
   ])
-  return results.every(r => r.status === 'fulfilled' && r.value.ok)
+  return results.some(r => r.status === 'fulfilled' && r.value.ok)
 }
 
 export function FormCard({ children }) {

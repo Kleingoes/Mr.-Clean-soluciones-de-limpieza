@@ -3,12 +3,12 @@ import useInView from '../hooks/useInView'
 import { WHATSAPP_NUMBER, EMAIL, PHONE, LOCATION, MAP_QUERY } from '../constants.js'
 
 const infoItems = [
-  { icon: Phone, label: 'Teléfono', value: PHONE, sub: 'Llámanos en horario de oficina' },
-  { icon: Mail, label: 'Correo', value: EMAIL, sub: 'Respondemos en menos de 24 horas' },
-  { icon: Mail, label: 'Correo', value: 'g.melquiades@mrclean.com.mx', sub: '' },
-  { icon: Mail, label: 'Correo', value: 'rafael@mrclean.com.mx', sub: '' },
-  { icon: MapPin, label: 'Ubicación', value: LOCATION, sub: 'Cobertura en todo el estado' },
-  { icon: Clock, label: 'Horario', value: 'Lun - Vie: 9:00 - 17:00', sub: 'Sáb: 9:00 - 14:00' },
+  { id: 'phone', icon: Phone, label: 'Teléfono', value: PHONE, sub: 'Llámanos en horario de oficina' },
+  { id: 'correo1', icon: Mail, label: 'Correo', value: EMAIL, sub: 'Respondemos en menos de 24 horas' },
+  { id: 'correo2', icon: Mail, label: 'Correo', value: 'g.melquiades@mrclean.com.mx', sub: '' },
+  { id: 'correo3', icon: Mail, label: 'Correo', value: 'rafael@mrclean.com.mx', sub: '' },
+  { id: 'ubicacion', icon: MapPin, label: 'Ubicación', value: LOCATION, sub: 'Cobertura en todo el estado' },
+  { id: 'horario', icon: Clock, label: 'Horario', value: 'Lun - Vie: 9:00 - 17:00', sub: 'Sáb: 9:00 - 14:00' },
 ]
 
 export default function Contacto() {
@@ -44,14 +44,14 @@ export default function Contacto() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {infoItems.map((item) => (
               <div
-                key={item.label}
+                key={item.id}
                 className="bg-white rounded-2xl p-5 border border-gray-200 border-l-4 border-l-transparent hover:border-l-brand-blue hover:border-brand-blue/30 flex items-start gap-3 transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 h-full min-h-[130px]"
               >
                 <div className="w-11 h-11 rounded-full bg-brand-light/40 flex items-center justify-center flex-shrink-0"><item.icon size={20} className="text-brand-blue" /></div>
                 <div>
                   <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{item.label}</p>
                   <p className="font-bold text-brand-navy text-sm">{item.value}</p>
-                  <p className="text-xs text-gray-400">{item.sub}</p>
+                  {item.sub && <p className="text-xs text-gray-400">{item.sub}</p>}
                 </div>
               </div>
             ))}
